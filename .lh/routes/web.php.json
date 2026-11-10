@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1794259348756,
@@ -20,6 +20,14 @@
                 {
                     "date": 1794259487985,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,10 +52,10 @@\n \n     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');\n     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');\n \n-    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favortesi.index');\n-    Route::get('/my-reviews', [RatingController::class, 'mine'])->name('ratings.mine');\n+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('profile.favorites');\n+    Route::get('/my-reviews', [RatingController::class, 'mine'])->name('profile.my-rating');\n });\n \n \n // Staff\n"
+                },
+                {
+                    "date": 1794322909708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n \n     Route::get('/favorites', [FavoriteController::class, 'index'])->name('profile.favorites');\n     Route::get('/my-reviews', [RatingController::class, 'mine'])->name('profile.my-rating');\n \n-    Route\n+    Route:\n });\n \n \n // Staff\n"
+                },
+                {
+                    "date": 1794322974577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n     Route::get('/favorites', [FavoriteController::class, 'index'])->name('profile.favorites');\n     Route::get('/my-reviews', [RatingController::class, 'mine'])->name('profile.my-rating');\n \n     Route::post('/reviews{rating}/replies', [ReviewReplyController::class, 'store'])->name('replies.store');\n-    Route\n+    Route::\n });\n \n \n // Staff\n"
                 }
             ],
             "date": 1794259348756,

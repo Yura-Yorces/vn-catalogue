@@ -3,11 +3,23 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1794248261671,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794323233468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n      */\n     public function show(VisualNovel $visualNovel): View\n     {\n         $visualNovel->load([\n-            'ratings' => fn ($q) => $q->with('user')->latest(),\n+            'ratings' => fn ($q) => $q->with('user', 'replies')->latest(),\n         ]);\n \n         $average = $visualNovel->ratings->avg('rating');\n         $count = $visualNovel->ratings->count();\n"
+                },
+                {
+                    "date": 1794323821211,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n      */\n     public function show(VisualNovel $visualNovel): View\n     {\n         $visualNovel->load([\n-            'ratings' => fn ($q) => $q->with('user', 'reviwReplies.user')->latest(),\n+            'ratings' => fn ($q) => $q->with('user', 'reviweplies.user')->latest(),\n         ]);\n \n         $average = $visualNovel->ratings->avg('rating');\n         $count = $visualNovel->ratings->count();\n"
+                },
+                {
+                    "date": 1794323978696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n      */\n     public function show(VisualNovel $visualNovel): View\n     {\n         $visualNovel->load([\n-            'ratings' => fn ($q) => $q->with('user', 'revieplies.user')->latest(),\n+            'ratings' => fn ($q) => $q->with('user', 'reviweplies.user')->latest(),\n         ]);\n \n         $average = $visualNovel->ratings->avg('rating');\n         $count = $visualNovel->ratings->count();\n"
                 }
             ],
             "date": 1794248261671,

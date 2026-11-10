@@ -46,7 +46,7 @@ class VisualNovelController extends Controller
     public function show(VisualNovel $visualNovel): View
     {
         $visualNovel->load([
-            'ratings' => fn ($q) => $q->with('user')->latest(),
+            'ratings' => fn ($q) => $q->with('user', 'replies.user')->latest(),
         ]);
 
         $average = $visualNovel->ratings->avg('rating');

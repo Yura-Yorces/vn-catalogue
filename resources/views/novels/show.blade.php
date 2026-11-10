@@ -149,10 +149,54 @@
                         </span>
                         <span class="text-yellow-400 font-semibold">{{ $rating->rating }} / 10</span>
                     </div>
+                    
                     @if ($rating->review)
                         <p class="text-gray-300 text-sm whitespace-pre-line">{{ $rating->review }}</p>
                     @endif
                     <p class="text-xs text-gray-500 mt-2">{{ $rating->created_at->diffForHumans() }}</p>
+
+                    {{-- replies thread --}}
+                    @if ($rating->replies->isNotEmpty())
+                        <ul class="mt-3 ml-4 space-y-2 border-l-2 border-gray-700 pl-3">
+                            @foreach ($rating->replies as $reply)
+                                <li class="text-sm">
+                                    <span class="text-gray-400 font-medium">
+                                        {{ $reply->user?->nickname ?? 'Deleted user' }}
+                                    </span>
+                                    <span class="text-gray-500 text-xs ml-1">{{ $reply->created_at->diffForHumans() }}</span>
+
+                                    @can('delete', $reply)
+                                        <form method="POST" action="{{ route('replies.destroy', $reply) }}" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                    class="text-red-400 hover:text-red-300 text-xs ml-1"
+                                                    data-confirm="Delete this reply?">
+                                                delete
+                                            </button>
+                                        </form>
+                                    @endcan
+
+                                    <p class="text-gray-300 whitespace-pre-line mt-1">{{ $reply->body }}</p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+
+                    {{-- reply form (any authenticated user) --}}
+                    @auth
+                        <form method="POST" action="{{ route('replies.store', $rating) }}"
+                            class="mt-3 ml-4 flex gap-2">
+                            @csrf
+                            <input name="body" type="text" required maxlength="2000"
+                                placeholder="Write a reply…"
+                                class="flex-1 rounded-lg bg-gray-900 border border-gray-700 px-3 py-1.5 text-sm text-gray-100 focus:border-blue-400 focus:ring-blue-400">
+                            <button type="submit"
+                                    class="rounded-lg bg-gray-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-gray-600">
+                                Reply
+                            </button>
+                        </form>
+                    @endauth
                 </li>
             @endforeach
         </ul>

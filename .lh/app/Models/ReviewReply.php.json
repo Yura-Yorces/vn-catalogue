@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/Models/ReviewReply.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1794322055648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794322072434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,6 @@\n {\n     /** @use HasFactory<\\Database\\Factories\\ReviewReplyFactory> */\n     use HasFactory;\n \n-    \n+    publ\n }\n"
+                },
+                {
+                    "date": 1794322109944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,15 @@\n <?php\n \n namespace App\\Models;\n \n+use Illuminate\\Database\\Eloquent\\Attributes\\Fillable;\n use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n use Illuminate\\Database\\Eloquent\\Model;\n \n class ReviewReply extends Model\n {\n     /** @use HasFactory<\\Database\\Factories\\ReviewReplyFactory> */\n     use HasFactory;\n \n-    \n+    protected Fillable\n }\n"
+                },
+                {
+                    "date": 1794322144823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,6 +16,6 @@\n         'user_id',\n         'body',\n     ];\n \n-    \n+    public function\n }\n"
+                }
+            ],
+            "date": 1794322055647,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass ReviewReply extends Model\n{\n    /** @use HasFactory<\\Database\\Factories\\ReviewReplyFactory> */\n    use HasFactory;\n\n    \n}\n"
+        }
+    ]
+}

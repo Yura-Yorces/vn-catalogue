@@ -1,0 +1,34 @@
+{
+    "sourceFile": "app/Http/Controllers/ReviewReplyController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1794322542012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794322548814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n     /**\n      * Store a newly created resource in storage.\n      */\n-    public function store(StoreReviewReplyRequest $request, )\n+    public function store(StoreReviewReplyRequest $request, Rating $rating)\n     {\n         //\n     }\n \n"
+                },
+                {
+                    "date": 1794322555950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n     /**\n      * Store a newly created resource in storage.\n      */\n-    public function store(StoreReviewReplyRequest $request, Rating $rating)\n+    public function store(StoreReviewReplyRequest $request, Rating $rating): \n     {\n         //\n     }\n \n"
+                },
+                {
+                    "date": 1794322562514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n     /**\n      * Store a newly created resource in storage.\n      */\n-    public function store(StoreReviewReplyRequest $request, Rating $rating): Redirec\n+    public function store(StoreReviewReplyRequest $request, Rating $rating): Redirect\n     {\n         //\n     }\n \n"
+                },
+                {
+                    "date": 1794322596976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,11 @@\n      * Store a newly created resource in storage.\n      */\n     public function store(StoreReviewReplyRequest $request, Rating $rating): RedirectResponse\n     {\n-        $this->authorize('create', ReviewReply::class)\n+        $this->authorize('create', ReviewReply::class);\n+\n+        \n     }\n \n     /**\n      * Display the specified resource.\n"
+                }
+            ],
+            "date": 1794322542012,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse App\\Models\\ReviewReply;\nuse App\\Http\\Requests\\StoreReviewReplyRequest;\nuse App\\Http\\Requests\\UpdateReviewReplyRequest;\n\nclass ReviewReplyController extends Controller\n{\n    /**\n     * Display a listing of the resource.\n     */\n    public function index()\n    {\n        //\n    }\n\n    /**\n     * Show the form for creating a new resource.\n     */\n    public function create()\n    {\n        //\n    }\n\n    /**\n     * Store a newly created resource in storage.\n     */\n    public function store(StoreReviewReplyRequest $request, )\n    {\n        //\n    }\n\n    /**\n     * Display the specified resource.\n     */\n    public function show(ReviewReply $reviewReply)\n    {\n        //\n    }\n\n    /**\n     * Show the form for editing the specified resource.\n     */\n    public function edit(ReviewReply $reviewReply)\n    {\n        //\n    }\n\n    /**\n     * Update the specified resource in storage.\n     */\n    public function update(UpdateReviewReplyRequest $request, ReviewReply $reviewReply)\n    {\n        //\n    }\n\n    /**\n     * Remove the specified resource from storage.\n     */\n    public function destroy(ReviewReply $reviewReply)\n    {\n        //\n    }\n}\n"
+        }
+    ]
+}

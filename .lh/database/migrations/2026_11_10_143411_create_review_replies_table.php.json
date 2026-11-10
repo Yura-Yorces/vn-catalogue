@@ -1,0 +1,42 @@
+{
+    "sourceFile": "database/migrations/2026_11_10_143411_create_review_replies_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1794321417089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794321708028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     public function up(): void\n     {\n         Schema::create('review_replies', function (Blueprint $table) {\n             $table->id();\n-            $table->foreignId('rating_user')->;\n+            $table->foreignId('rating_user')-;\n             $table->timestamps();\n         });\n     }\n \n"
+                },
+                {
+                    "date": 1794321937690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     public function up(): void\n     {\n         Schema::create('review_replies', function (Blueprint $table) {\n             $table->id();\n-            $table->foreignId('rating_user')-;\n+            $table->foreignId('rating_user')->constrained;\n             $table->timestamps();\n         });\n     }\n \n"
+                },
+                {
+                    "date": 1794321948643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n     public function up(): void\n     {\n         Schema::create('review_replies', function (Blueprint $table) {\n             $table->id();\n-            $table->foreignId('rating_user')->constrained;\n             $table->timestamps();\n+            $table->foreignId('rating_user')->constrained('ratings')->cascadeOnDelete;\n         });\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1794321953895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,10 @@\n     {\n         Schema::create('review_replies', function (Blueprint $table) {\n             $table->id();\n             $table->timestamps();\n-            $table->foreignId('rating_user')->constrained('ratings')->cascadeOnDelete;\n+            $table->foreignId('rating_user')->constrained('ratings')->cascadeOnDelete();\n+            \n         });\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1794321962470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         Schema::create('review_replies', function (Blueprint $table) {\n             $table->id();\n             $table->timestamps();\n             $table->foreignId('rating_user')->constrained('ratings')->cascadeOnDelete();\n-            \n+            $table->foreignId('user_id')->constrained('ratings')->cascadeOnDelete();\n         });\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1794321968229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         Schema::create('review_replies', function (Blueprint $table) {\n             $table->id();\n             $table->timestamps();\n             $table->foreignId('rating_user')->constrained('ratings')->cascadeOnDelete();\n-            $table->foreignId('user_id')->constrained('')->cascadeOnDelete();\n+            $table->foreignId('user_id')->constrained('u')->cascadeOnDelete();\n         });\n     }\n \n     /**\n"
+                }
+            ],
+            "date": 1794321417089,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    /**\n     * Run the migrations.\n     */\n    public function up(): void\n    {\n        Schema::create('review_replies', function (Blueprint $table) {\n            $table->id();\n            $table->foreignId('rating_user')->;\n            $table->timestamps();\n        });\n    }\n\n    /**\n     * Reverse the migrations.\n     */\n    public function down(): void\n    {\n        Schema::dropIfExists('review_replies');\n    }\n};\n"
+        }
+    ]
+}

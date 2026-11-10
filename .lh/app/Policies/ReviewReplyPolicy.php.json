@@ -1,0 +1,70 @@
+{
+    "sourceFile": "app/Policies/ReviewReplyPolicy.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1794322313620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794322326209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return false;\n+        return $user;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322333312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user;\n+        return $user->id == ;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322341051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user->id == ;\n+        return $user->id === $user->;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322347247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user->id === $user->;\n+        return $user->id === $user->reply;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322352979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user->id === $user->reply;\n+        return $user->id === $reply;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322358567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user->id === $reply;\n+        return $user->id === $reply->user;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322366183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user->id === $reply->user;\n+        return $user->id === $reply->user_id\\;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322378382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user->id === $reply->user_id\\;\n+        return $user->id === $reviewReply->user;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322387612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,10 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user->id === $reviewReply->user;\n+        return $user->id === $reviewReply->user\n+            || ;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322395495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n         return $user->id === $reviewReply->user\n-            || ;\n+            || $user->role;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794322405092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n         return $user->id === $reviewReply->user\n-            || $user->role;\n+            || $user->isStaff;\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794324893921,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,10 +44,10 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user->id === $reviewReply->user\n-            || $user->isStaff;\n+        return $user->id === $reviewReply->user_id\n+            || $user->isStaff();\n     }\n \n     /**\n      * Determine whether the user can restore the model.\n"
+                },
+                {
+                    "date": 1794324955616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n      * Determine whether the user can delete the model.\n      */\n     public function delete(User $user, ReviewReply $reviewReply): bool\n     {\n-        return $user->id === $reviewReply->user_id\n+        return $user->id === $reviewReply->user_\n             || $user->isStaff();\n     }\n \n     /**\n"
+                }
+            ],
+            "date": 1794322313620,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Policies;\n\nuse App\\Models\\ReviewReply;\nuse App\\Models\\User;\nuse Illuminate\\Auth\\Access\\Response;\n\nclass ReviewReplyPolicy\n{\n    /**\n     * Determine whether the user can view any models.\n     */\n    public function viewAny(User $user): bool\n    {\n        return false;\n    }\n\n    /**\n     * Determine whether the user can view the model.\n     */\n    public function view(User $user, ReviewReply $reviewReply): bool\n    {\n        return false;\n    }\n\n    /**\n     * Determine whether the user can create models.\n     */\n    public function create(User $user): bool\n    {\n        return true;\n    }\n\n    /**\n     * Determine whether the user can update the model.\n     */\n    public function update(User $user, ReviewReply $reviewReply): bool\n    {\n        return false;\n    }\n\n    /**\n     * Determine whether the user can delete the model.\n     */\n    public function delete(User $user, ReviewReply $reviewReply): bool\n    {\n        return false;\n    }\n\n    /**\n     * Determine whether the user can restore the model.\n     */\n    public function restore(User $user, ReviewReply $reviewReply): bool\n    {\n        return false;\n    }\n\n    /**\n     * Determine whether the user can permanently delete the model.\n     */\n    public function forceDelete(User $user, ReviewReply $reviewReply): bool\n    {\n        return false;\n    }\n}\n"
+        }
+    ]
+}

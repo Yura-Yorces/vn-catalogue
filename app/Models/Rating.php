@@ -27,4 +27,9 @@ class Rating extends Model
     {
         return $this->belongsTo(VisualNovel::class);
     }
+
+    public function replies()
+    {
+        return $this->hasMany(ReviewReply::class);
+    }
 }

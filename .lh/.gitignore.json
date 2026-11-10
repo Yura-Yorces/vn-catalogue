@@ -1,0 +1,22 @@
+{
+    "sourceFile": ".gitignore",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1794295587602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794295600855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,31 +1,27 @@\n-/vendor/\n-node_modules/\n-npm-debug.log\n-yarn-error.log\n-\n-# Laravel 4 specific\n-bootstrap/compiled.php\n-app/storage/\n-\n-# Laravel 5 & Lumen specific\n-public/storage\n-public/hot\n-\n-# Laravel 5 & Lumen specific with changed public path\n-public_html/storage\n-public_html/hot\n-\n-storage/*.key\n+*.log\n+.DS_Store\n .env\n-Homestead.yaml\n-Homestead.json\n-/.vagrant\n+.env.backup\n+.env.production\n+.phpactor.json\n .phpunit.result.cache\n+/.codex\n+/.cursor/\n+/.idea\n+/.nova\n /.phpunit.cache\n-\n+/.vscode\n+/.zed\n+/auth.json\n+/node_modules\n /public/build\n+/public/fonts-manifest.dev.json\n+/public/hot\n+/public/storage\n+/storage/*.key\n /storage/pail\n-.env.backup\n-.env.production\n-.phpactor.json\n-auth.json\n+/vendor\n+_ide_helper.php\n+Homestead.json\n+Homestead.yaml\n+Thumbs.db\n"
+                }
+            ],
+            "date": 1794295587602,
+            "name": "Commit-0",
+            "content": "/vendor/\nnode_modules/\nnpm-debug.log\nyarn-error.log\n\n# Laravel 4 specific\nbootstrap/compiled.php\napp/storage/\n\n# Laravel 5 & Lumen specific\npublic/storage\npublic/hot\n\n# Laravel 5 & Lumen specific with changed public path\npublic_html/storage\npublic_html/hot\n\nstorage/*.key\n.env\nHomestead.yaml\nHomestead.json\n/.vagrant\n.phpunit.result.cache\n/.phpunit.cache\n\n/public/build\n/storage/pail\n.env.backup\n.env.production\n.phpactor.json\nauth.json\n"
+        }
+    ]
+}

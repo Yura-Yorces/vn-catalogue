@@ -8,8 +8,9 @@ use App\Http\Controllers\Staff\UserController as StaffUserController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
-
 use App\Http\Controllers\VisualNovelController;
+use App\Http\Controllers\ReviewReplyController;
+
 use Illuminate\Support\Facades\Route;
 
 // Public
@@ -55,6 +56,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('profile.favorites');
     Route::get('/my-reviews', [RatingController::class, 'mine'])->name('profile.my-rating');
+
+    Route::post('/reviews{rating}/replies', [ReviewReplyController::class, 'store'])->name('replies.store');
+    Route::delete('/replies/{reviewReply}', [ReviewReplyController::class, 'destroy'])->name('replies.destroy');
 });
 
 

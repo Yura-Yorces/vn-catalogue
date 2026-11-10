@@ -1,0 +1,38 @@
+{
+    "sourceFile": "app/Http/Requests/StoreReviewReplyRequest.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1794322455326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794322462680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n      * Determine if the user is authorized to make this request.\n      */\n     public function authorize(): bool\n     {\n-        return $this->user;\n+        return $this->user() !== null;\n     }\n \n     /**\n      * Get the validation rules that apply to the request.\n"
+                },
+                {
+                    "date": 1794322474433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,8 @@\n      */\n     public function rules(): array\n     {\n         return [\n-            //\n+            'body' => \n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1794322480969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,8 @@\n      */\n     public function rules(): array\n     {\n         return [\n-            'body' => \n+            'body' => ['required', '']\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1794322486628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,8 @@\n      */\n     public function rules(): array\n     {\n         return [\n-            'body' => ['required', '']\n+            'body' => ['required', 'string', 'max:']\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1794322496114,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,8 @@\n      */\n     public function rules(): array\n     {\n         return [\n-            'body' => ['required', 'string', 'max:2000']\n+            'body' => ['required', 'string', 'max:2000'],\n         ];\n     }\n }\n"
+                }
+            ],
+            "date": 1794322455326,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Requests;\n\nuse Illuminate\\Contracts\\Validation\\ValidationRule;\nuse Illuminate\\Foundation\\Http\\FormRequest;\n\nclass StoreReviewReplyRequest extends FormRequest\n{\n    /**\n     * Determine if the user is authorized to make this request.\n     */\n    public function authorize(): bool\n    {\n        return $this->user;\n    }\n\n    /**\n     * Get the validation rules that apply to the request.\n     *\n     * @return array<string, ValidationRule|array<mixed>|string>\n     */\n    public function rules(): array\n    {\n        return [\n            //\n        ];\n    }\n}\n"
+        }
+    ]
+}
