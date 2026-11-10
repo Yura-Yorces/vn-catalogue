@@ -1,0 +1,26 @@
+{
+    "sourceFile": "resources/js/app.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1794250801234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794251441262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,4 +3,22 @@\n     if (btn?.dataset.confirm && ! confirm(btn.dataset.confirm)) {\n         e.preventDefault();\n     }\n });\n+\n+document.addEventListener('submit', (e) => {\n+    const btn = e.submitter;\n+    const form = btn?.form;\n+    if (! form) return;\n+\n+    let msg = btn?.dataset.confirm;\n+\n+    // allow a <select data-confirm-label> to inject its current option text\n+    const select = form.querySelector('select[data-confirm-label]');\n+    if (select && msg) {\n+        msg = msg.replace('%s', select.options[select.selectedIndex].text);\n+    }\n+\n+    if (msg && ! confirm(msg)) {\n+        e.preventDefault();\n+    }\n+});\n"
+                },
+                {
+                    "date": 1794251469869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,6 @@\n document.addEventListener('submit', (e) => {\n     const btn = e.submitter;\n-    if (btn?.dataset.confirm && ! confirm(btn.dataset.confirm)) {\n-        e.preventDefault();\n-    }\n-});\n-\n-document.addEventListener('submit', (e) => {\n-    const btn = e.submitter;\n     const form = btn?.form;\n     if (! form) return;\n \n     let msg = btn?.dataset.confirm;\n"
+                }
+            ],
+            "date": 1794250801234,
+            "name": "Commit-0",
+            "content": "document.addEventListener('submit', (e) => {\n    const btn = e.submitter;\n    if (btn?.dataset.confirm && ! confirm(btn.dataset.confirm)) {\n        e.preventDefault();\n    }\n});\n"
+        }
+    ]
+}

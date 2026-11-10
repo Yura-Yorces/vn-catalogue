@@ -1,0 +1,44 @@
+@extends('dashboard')
+
+@section('main')
+<div class="p-6 md:p-8 max-w-lg">
+    <h1 class="text-2xl font-bold text-white mb-1">Edit profile</h1>
+    <p class="text-gray-400 mb-6">Change how your name appears on reviews.</p>
+
+    @if (session('success'))
+        <div class="mb-4 rounded-lg bg-green-900/40 border border-green-700 px-4 py-3 text-sm text-green-200">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="mb-4 rounded-lg bg-red-900/40 border border-red-700 px-4 py-3 text-sm text-red-200">
+            <ul class="list-disc list-inside space-y-1">
+                @foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form method="POST" action="{{ route('profile.update') }}"
+          class="bg-gray-800 border border-gray-700 rounded-xl p-6 space-y-4">
+        @csrf
+        @method('PATCH')
+
+        <div>
+            <label class="block text-sm font-medium text-gray-300 mb-1">Display name</label>
+            <input name="nickname" type="text"
+                   value="{{ old('nickname', $user->nickname) }}" required
+                   class="w-full rounded-lg bg-gray-900 border border-gray-700 px-3 py-2 text-gray-100 focus:border-blue-400 focus:ring-blue-400">
+        </div>
+
+        <div class="text-sm text-gray-500">
+            Username: <span class="text-gray-300">{{ $user->username }}</span> (cannot be changed)
+        </div>
+
+        <button type="submit"
+                class="rounded-lg bg-blue-400 px-4 py-2 text-sm font-semibold text-black hover:bg-blue-300">
+            Save
+        </button>
+    </form>
+</div>
+@endsection

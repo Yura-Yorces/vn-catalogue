@@ -1,0 +1,34 @@
+{
+    "sourceFile": "database/seeders/VisualNovelSeeder.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1794261255129,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794261262806,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n         ];\n \n         foreach ($novels as $novel) {\n             $novel['slug'] = Str::slug($novel['title']);\n-            $\n+            $novel['c']\n \n             VisualNovel::create($novel);\n         }\n     }\n"
+                },
+                {
+                    "date": 1794261268216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n         ];\n \n         foreach ($novels as $novel) {\n             $novel['slug'] = Str::slug($novel['title']);\n-            $novel['c']\n+            $novel['cover_image']\n \n             VisualNovel::create($novel);\n         }\n     }\n"
+                },
+                {
+                    "date": 1794261274090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n         ];\n \n         foreach ($novels as $novel) {\n             $novel['slug'] = Str::slug($novel['title']);\n-            $novel['cover_image']\n+            $novel['cover_image'] =\n \n             VisualNovel::create($novel);\n         }\n     }\n"
+                },
+                {
+                    "date": 1794261290965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n         ];\n \n         foreach ($novels as $novel) {\n             $novel['slug'] = Str::slug($novel['title']);\n-            $novel['cover_image'] =\n+            $novel['cover_image'] = $novel['cover_image'] = 'https://placehold.co/300x400/1f2937/60a5fa?text=' . urlencode($novel['title']);;\n \n             VisualNovel::create($novel);\n         }\n     }\n"
+                }
+            ],
+            "date": 1794261255129,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace Database\\Seeders;\n\nuse Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents;\nuse Illuminate\\Database\\Seeder;\nuse App\\Models\\VisualNovel;\nuse Illuminate\\Support\\Str;\n\nclass VisualNovelSeeder extends Seeder\n{\n    /**\n     * Run the database seeds.\n     */\n    public function run(): void\n    {\n        //\n        $novels = [\n            [\n                'title' => 'Tsukihime',\n                'developer' => 'Type-Moon',\n                'publisher' => 'Type-Moon',\n                'release_date' => '2000-12-28',\n                'description' => 'Tsukihime is a visual novel developed by Type-Moon. It follows the story of Shiki Tohno, a young man who gains the ability to see the \"death lines\" of objects and people after surviving a near-fatal accident. The game explores themes of supernatural abilities, vampires, and the consequences of one\\'s actions.',\n            ],\n            [\n                'title' => 'Fate/stay night',\n                'developer' => 'Type-Moon',\n                'publisher' => 'Type-Moon',\n                'release_date' => '2004-01-30',\n                'description' => 'Fate/stay night is a visual novel developed by Type-Moon. It tells the story of a secret magical tournament called the Holy Grail War, where mages summon heroic spirits to fight for the chance to have their wishes granted. The game features multiple story routes and explores themes of heroism, morality, and the consequences of one\\'s choices.',\n            ],\n        ];\n\n        foreach ($novels as $novel) {\n            $novel['slug'] = Str::slug($novel['title']);\n            $\n\n            VisualNovel::create($novel);\n        }\n    }\n}\n"
+        }
+    ]
+}

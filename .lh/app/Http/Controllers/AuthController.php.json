@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Http/Controllers/AuthController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1794257516311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794257522385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         }\n \n         $request->session()->regenerate();\n \n-        return redirect('/')->with('success', 'You are logged in!');\n+        return redirect('/novels')->with('success', 'You are logged in!');\n     }\n \n     public function showRegisterForm(): View\n     {\n"
+                }
+            ],
+            "date": 1794257516311,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse App\\Models\\User;\nuse Illuminate\\Http\\RedirectResponse;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Auth;\nuse Illuminate\\Validation\\Rules\\Password;\nuse Illuminate\\View\\View;\n\nclass AuthController extends Controller\n{\n\n    public function showLoginForm(): View\n    {\n        return view('auth.login');\n    }\n\n    public function login(Request $request): RedirectResponse\n    {\n        $credentials = $request->validate([\n            'username' => ['required', 'string'],\n            'password' => ['required', 'string'],\n        ]);\n\n        if (! Auth::attempt($credentials, $request->boolean('remember'))) {\n            return back()->withInput($request->only('username', 'remember'))\n                ->withErrors([\n                    'username' => 'The provided credentials do not match our records.',\n                ]);\n        }\n\n        $request->session()->regenerate();\n\n        return redirect('/')->with('success', 'You are logged in!');\n    }\n\n    public function showRegisterForm(): View\n    {\n        return view('auth.register');\n    }\n\n    public function register(Request $request): RedirectResponse\n    {\n        $validatedData = $request->validate([\n            'nickname' => ['required', 'string', 'max:255'],\n            'username' => ['required', 'string', 'max:255', 'unique:users,username', 'alpha_dash'],\n            'password' => ['required', 'confirmed', Password::defaults()],\n        ]);\n\n        $user = User::create($validatedData);\n\n        Auth::login($user);\n\n        return redirect()->intended('/')->with('success', 'You are registered and logged in!');\n    }\n\n    public function logout(Request $request): RedirectResponse\n    {\n        Auth::logout();\n\n        $request->session()->invalidate();\n        $request->session()->regenerateToken();\n\n        return redirect('/')->with('success', 'You are logged out!');\n    }\n}\n"
+        }
+    ]
+}

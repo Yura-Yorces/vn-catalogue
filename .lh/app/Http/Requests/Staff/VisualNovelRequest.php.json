@@ -1,0 +1,38 @@
+{
+    "sourceFile": "app/Http/Requests/Staff/VisualNovelRequest.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1794255771426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794255796208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     public function rules(): array\n     {\n         return [\n             'title' => ['required', 'string', 'max:255'],\n-            'developer' => ['nullable', 'string', 'max:255'],\n+            'developer' => ['re', 'string', 'max:255'],\n             'publisher' => ['nullable', 'string', 'max:255'],\n             'release_date' => ['nullable', 'date'],\n             'description' => ['nullable', 'string'],\n         ];\n"
+                },
+                {
+                    "date": 1794260355938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,10 @@\n     public function rules(): array\n     {\n         return [\n             'title' => ['required', 'string', 'max:255'],\n-            'developer' => ['re', 'string', 'max:255'],\n+            'c'\n+            'developer' => ['required', 'string', 'max:255'],\n             'publisher' => ['nullable', 'string', 'max:255'],\n             'release_date' => ['nullable', 'date'],\n             'description' => ['nullable', 'string'],\n         ];\n"
+                },
+                {
+                    "date": 1794260363186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     public function rules(): array\n     {\n         return [\n             'title' => ['required', 'string', 'max:255'],\n-            'c'\n+            'cover_iamge' => []\n             'developer' => ['required', 'string', 'max:255'],\n             'publisher' => ['nullable', 'string', 'max:255'],\n             'release_date' => ['nullable', 'date'],\n             'description' => ['nullable', 'string'],\n"
+                },
+                {
+                    "date": 1794260378588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     public function rules(): array\n     {\n         return [\n             'title' => ['required', 'string', 'max:255'],\n-            'cover_iamge' => [],\n+            'cover_iamge' => <div nullable=\"\"></div>,\n             'developer' => ['required', 'string', 'max:255'],\n             'publisher' => ['nullable', 'string', 'max:255'],\n             'release_date' => ['nullable', 'date'],\n             'description' => ['nullable', 'string'],\n"
+                },
+                {
+                    "date": 1794260386035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     public function rules(): array\n     {\n         return [\n             'title' => ['required', 'string', 'max:255'],\n-            'cover_iamge' => [nullable, ],\n+            'cover_iamge' => ['nullable'],\n             'developer' => ['required', 'string', 'max:255'],\n             'publisher' => ['nullable', 'string', 'max:255'],\n             'release_date' => ['nullable', 'date'],\n             'description' => ['nullable', 'string'],\n"
+                }
+            ],
+            "date": 1794255771426,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Requests\\Staff;\n\nuse Illuminate\\Contracts\\Validation\\ValidationRule;\nuse Illuminate\\Foundation\\Http\\FormRequest;\n\nclass VisualNovelRequest extends FormRequest\n{\n    /**\n     * Determine if the user is authorized to make this request.\n     */\n    public function authorize(): bool\n    {\n        return $this->user()?->isStaff() ?? false;\n    }\n\n    /**\n     * Get the validation rules that apply to the request.\n     *\n     * @return array<string, ValidationRule|array<mixed>|string>\n     */\n    public function rules(): array\n    {\n        return [\n            'title' => ['required', 'string', 'max:255'],\n            'developer' => ['nullable', 'string', 'max:255'],\n            'publisher' => ['nullable', 'string', 'max:255'],\n            'release_date' => ['nullable', 'date'],\n            'description' => ['nullable', 'string'],\n        ];\n    }\n}\n"
+        }
+    ]
+}

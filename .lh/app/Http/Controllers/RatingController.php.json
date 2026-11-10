@@ -1,0 +1,38 @@
+{
+    "sourceFile": "app/Http/Controllers/RatingController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1794258323281,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794258327217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,7 +37,7 @@\n     }\n \n     public function mine()\n     {\n-        $rating = auth()->user->\n+        $rating = auth()->user()->\n     }\n }\n"
+                },
+                {
+                    "date": 1794258333444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,7 +37,7 @@\n     }\n \n     public function mine()\n     {\n-        $rating = auth()->user()->\n+        $rating = auth()->user()->ratings()\n     }\n }\n"
+                },
+                {
+                    "date": 1794258339618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,6 +38,7 @@\n \n     public function mine()\n     {\n         $rating = auth()->user()->ratings()\n+            ->\n     }\n }\n"
+                },
+                {
+                    "date": 1794258345628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,7 +38,7 @@\n \n     public function mine()\n     {\n         $rating = auth()->user()->ratings()\n-            ->with()\n+            ->with('')\n     }\n }\n"
+                },
+                {
+                    "date": 1794258357728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,7 +39,7 @@\n     public function mine()\n     {\n         $rating = auth()->user()->ratings()\n             ->with('visualNovel')\n-            ->latest\n+            ->latest()\n     }\n }\n"
+                }
+            ],
+            "date": 1794258323281,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse App\\Http\\Requests\\StoreRatingRequest;\nuse App\\Models\\VisualNovel;\nuse Illuminate\\Http\\RedirectResponse;\nuse Illuminate\\View\\View;\n\nclass RatingController extends Controller\n{\n    public function store(StoreRatingRequest $request, VisualNovel $visualNovel): RedirectResponse\n    {\n        $visualNovel->ratings()->updateOrCreate(\n            ['user_id' => $request->user()->id],\n            [\n                'rating' => $request->integer('rating'),\n                'review' => $request->input('review'),\n            ],\n        );\n\n        return back()->with('success', 'Your review has been saved.');\n    }\n\n    public function destroy(VisualNovel $visualNovel): RedirectResponse\n    {\n        $rating = $visualNovel->ratings()\n            ->where('user_id', request()->user()->id)\n            ->first();\n\n        if ($rating) {\n            $this->authorize('delete', $rating);\n            $rating->delete();\n        }\n\n        return back()->with('success', 'Your review has been removed.');\n    }\n\n    public function mine()\n    {\n        $rating = auth()->user->\n    }\n}\n"
+        }
+    ]
+}

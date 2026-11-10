@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/profile/favorite.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1794258549837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1794258549837,
+            "name": "Commit-0",
+            "content": "@extends('dashboard')\r\n\r\n@section('main')\r\n<div class=\"p-6 md:p-8\">\r\n    <h1 class=\"text-2xl font-bold text-white mb-1\">My Favorites</h1>\r\n    <p class=\"text-gray-400 mb-6\">Visual novels you've bookmarked.</p>\r\n\r\n    @if (session('success'))\r\n        <div class=\"mb-4 rounded-lg bg-green-900/40 border border-green-700 px-4 py-3 text-sm text-green-200\">\r\n            {{ session('success') }}\r\n        </div>\r\n    @endif\r\n\r\n    @if ($favorites->isEmpty())\r\n        <p class=\"text-gray-400\">\r\n            You haven't favorited any novels yet.\r\n            <a href=\"{{ route('novels.index') }}\" class=\"text-blue-400 hover:text-blue-300\">Browse the collection</a>.\r\n        </p>\r\n    @else\r\n        <div class=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4\">\r\n            @foreach ($favorites as $novel)\r\n                <a href=\"{{ route('novels.show', $novel) }}\"\r\n                   class=\"bg-gray-800 border border-gray-700 rounded-xl p-4 hover:border-yellow-400/40 transition flex flex-col\">\r\n                    <h2 class=\"font-semibold text-white text-lg leading-tight mb-1\">\r\n                        {{ $novel->title }}\r\n                    </h2>\r\n                    <p class=\"text-sm text-gray-400 mb-3\">{{ $novel->developer }}</p>\r\n\r\n                    <div class=\"mt-auto flex items-center justify-between text-sm\">\r\n                        <span class=\"text-yellow-400\">\r\n                            @if ($novel->ratings_avg_rating)\r\n                                {{ number_format($novel->ratings_avg_rating, 1) }} / 10\r\n                            @else\r\n                                <span class=\"text-gray-500\">No ratings</span>\r\n                            @endif\r\n                        </span>\r\n                        <span class=\"text-gray-500\">\r\n                            {{ $novel->ratings_count }} {{ Str::plural('review', $novel->ratings_count) }}\r\n                        </span>\r\n                    </div>\r\n                </a>\r\n            @endforeach\r\n        </div>\r\n\r\n        <div class=\"mt-8\">{{ $favorites->links() }}</div>\r\n    @endif\r\n</div>\r\n@endsection\r\n"
+        }
+    ]
+}

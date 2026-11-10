@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Http/Controllers/VisualNovelController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1794248261671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1794248261671,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse App\\Models\\VisualNovel;\nuse App\\Http\\Requests\\StoreVisualNovelRequest;\nuse App\\Http\\Requests\\UpdateVisualNovelRequest;\nuse Illuminate\\View\\View;\n\nclass VisualNovelController extends Controller\n{\n    /**\n     * Display a listing of the resource.\n     */\n    public function index(): View\n    {\n        //\n        $novels = VisualNovel::query()\n            ->withAvg('ratings', 'rating')\n            ->withCount('ratings')\n            ->orderBy('title')\n            ->paginate(10);\n\n        return view('novels.index', compact('novels'));\n    }\n\n    /**\n     * Show the form for creating a new resource.\n     */\n    public function create()\n    {\n        //\n    }\n\n    /**\n     * Store a newly created resource in storage.\n     */\n    public function store(StoreVisualNovelRequest $request)\n    {\n        //\n    }\n\n    /**\n     * Display the specified resource.\n     */\n    public function show(VisualNovel $visualNovel): View\n    {\n        $visualNovel->load([\n            'ratings' => fn ($q) => $q->with('user')->latest(),\n        ]);\n\n        $average = $visualNovel->ratings->avg('rating');\n        $count = $visualNovel->ratings->count();\n\n        $userRating = auth()->check()\n            ? $visualNovel->ratings->firstWhere('user_id', auth()->id())\n            : null;\n\n        $isFavorited = auth()->check()\n            && auth()->user()->favorites()\n                ->where('visual_novels.id', $visualNovel->id)\n                ->exists();\n\n        return view('novels.show', compact(\n            'visualNovel', 'average', 'count', 'userRating', 'isFavorited'\n        ));\n    }\n\n    /**\n     * Show the form for editing the specified resource.\n     */\n    public function edit(VisualNovel $visualNovel)\n    {\n        //\n    }\n\n    /**\n     * Update the specified resource in storage.\n     */\n    public function update(UpdateVisualNovelRequest $request, VisualNovel $visualNovel)\n    {\n        //\n    }\n\n    /**\n     * Remove the specified resource from storage.\n     */\n    public function destroy(VisualNovel $visualNovel)\n    {\n        //\n    }\n}\n"
+        }
+    ]
+}

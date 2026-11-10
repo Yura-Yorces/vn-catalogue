@@ -1,0 +1,38 @@
+{
+    "sourceFile": "app/Http/Controllers/Staff/VisualNovelController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1794248938269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794248952134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n use App\\Http\\Requests\\Staff\\VisualNovelRequest;\n use Illuminate\\Http\\RedirectResponse;\n use Illuminate\\View\\View;\n \n+\n class VisualNovelController extends Controller\n {\n     //\n     public function index(): View\n"
+                },
+                {
+                    "date": 1794248978216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n      * Store a newly created resource in storage.\n      */\n     public function store(Request $request)\n     {\n-        //\n+        $store = \n     }\n \n     /**\n      * Display the specified resource.\n"
+                },
+                {
+                    "date": 1794248984410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n use App\\Models\\VisualNovel;\n use App\\Http\\Requests\\Staff\\VisualNovelRequest;\n use Illuminate\\Http\\RedirectResponse;\n use Illuminate\\View\\View;\n+use Illuminate\\Http\\Request;\n \n-\n class VisualNovelController extends Controller\n {\n     //\n     public function index(): View\n@@ -35,9 +35,9 @@\n      * Store a newly created resource in storage.\n      */\n     public function store(Request $request)\n     {\n-        $store = \n+        $store = request->\n     }\n \n     /**\n      * Display the specified resource.\n"
+                },
+                {
+                    "date": 1794248989445,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n      * Store a newly created resource in storage.\n      */\n     public function store(Request $request)\n     {\n-        $store = request->val\n+        $store = \n     }\n \n     /**\n      * Display the specified resource.\n"
+                },
+                {
+                    "date": 1794249002761,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n      * Store a newly created resource in storage.\n      */\n     public function store(Request $request)\n     {\n-        $store = $request->validate([])\n+        $store = $request->validated\n     }\n \n     /**\n      * Display the specified resource.\n"
+                }
+            ],
+            "date": 1794248938269,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Staff;\n\nuse App\\Http\\Controllers\\Controller;\nuse App\\Models\\VisualNovel;\nuse App\\Http\\Requests\\Staff\\VisualNovelRequest;\nuse Illuminate\\Http\\RedirectResponse;\nuse Illuminate\\View\\View;\n\nclass VisualNovelController extends Controller\n{\n    //\n    public function index(): View\n    {\n        $novels = VisualNovel::query()\n            ->withAvg('ratings', 'rating')\n            ->withCount('ratings')\n            ->orderBy('title')\n            ->paginate(10);\n\n        return view('staff.novels.index', compact('novels'));\n    }\n\n    /**\n     * Show the form for creating a new resource.\n     */\n    public function create()\n    {\n        //\n    }\n\n    /**\n     * Store a newly created resource in storage.\n     */\n    public function store(Request $request)\n    {\n        //\n    }\n\n    /**\n     * Display the specified resource.\n     */\n    public function show(string $id)\n    {\n        //\n    }\n\n    /**\n     * Show the form for editing the specified resource.\n     */\n    public function edit(string $id)\n    {\n        //\n    }\n\n    /**\n     * Update the specified resource in storage.\n     */\n    public function update(Request $request, string $id)\n    {\n        //\n    }\n\n    /**\n     * Remove the specified resource from storage.\n     */\n    public function destroy(string $id)\n    {\n        //\n    }\n}\n"
+        }
+    ]
+}

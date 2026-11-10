@@ -1,0 +1,54 @@
+{
+    "sourceFile": "app/Http/Controllers/FavoriteController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1794257949530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794257956829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n class FavoriteController extends Controller\n {\n     public function store(VisualNovel $visualNovel): RedirectResponse\n     {\n-        \n+        $favorites = \n \n         $this->authorize('create', \\App\\Models\\Favorite::class);\n \n         $result = request()->user()->favorites()->toggle($visualNovel->id);\n"
+                },
+                {
+                    "date": 1794257964286,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n class FavoriteController extends Controller\n {\n     public function store(VisualNovel $visualNovel): RedirectResponse\n     {\n-        $favorites = \n+        $favorites = auth()-\n \n         $this->authorize('create', \\App\\Models\\Favorite::class);\n \n         $result = request()->user()->favorites()->toggle($visualNovel->id);\n"
+                },
+                {
+                    "date": 1794257972982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n class FavoriteController extends Controller\n {\n     public function store(VisualNovel $visualNovel): RedirectResponse\n     {\n-        $favorites = auth()-\n+        $favorites = auth()->user()->favorites()\n \n         $this->authorize('create', \\App\\Models\\Favorite::class);\n \n         $result = request()->user()->favorites()->toggle($visualNovel->id);\n"
+                },
+                {
+                    "date": 1794257981241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n {\n     public function store(VisualNovel $visualNovel): RedirectResponse\n     {\n         $favorites = auth()->user()->favorites()\n+            ->withA;\n \n         $this->authorize('create', \\App\\Models\\Favorite::class);\n \n         $result = request()->user()->favorites()->toggle($visualNovel->id);\n"
+                },
+                {
+                    "date": 1794257990184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n {\n     public function store(VisualNovel $visualNovel): RedirectResponse\n     {\n         $favorites = auth()->user()->favorites()\n-            ->withA;\n+            ->withAvg('rat');\n \n         $this->authorize('create', \\App\\Models\\Favorite::class);\n \n         $result = request()->user()->favorites()->toggle($visualNovel->id);\n"
+                },
+                {
+                    "date": 1794257995308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n {\n     public function store(VisualNovel $visualNovel): RedirectResponse\n     {\n         $favorites = auth()->user()->favorites()\n-            ->withAvg('rat');\n+            ->withAvg('ratings', 'ratings');\n \n         $this->authorize('create', \\App\\Models\\Favorite::class);\n \n         $result = request()->user()->favorites()->toggle($visualNovel->id);\n"
+                },
+                {
+                    "date": 1794258004261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,10 @@\n {\n     public function store(VisualNovel $visualNovel): RedirectResponse\n     {\n         $favorites = auth()->user()->favorites()\n-            ->withAvg('ratings', 'ratings');\n+            ->withAvg('ratings', 'ratings')\n+            ->withCount();\n \n         $this->authorize('create', \\App\\Models\\Favorite::class);\n \n         $result = request()->user()->favorites()->toggle($visualNovel->id);\n"
+                },
+                {
+                    "date": 1794258011019,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,10 @@\n     public function store(VisualNovel $visualNovel): RedirectResponse\n     {\n         $favorites = auth()->user()->favorites()\n             ->withAvg('ratings', 'ratings')\n-            ->withCount('rating');\n+            ->withCount('rating')\n+            ->;\n \n         $this->authorize('create', \\App\\Models\\Favorite::class);\n \n         $result = request()->user()->favorites()->toggle($visualNovel->id);\n"
+                },
+                {
+                    "date": 1794258018123,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     {\n         $favorites = auth()->user()->favorites()\n             ->withAvg('ratings', 'ratings')\n             ->withCount('rating')\n-            ->order;\n+            ->orderByDesc();\n \n         $this->authorize('create', \\App\\Models\\Favorite::class);\n \n         $result = request()->user()->favorites()->toggle($visualNovel->id);\n"
+                }
+            ],
+            "date": 1794257949530,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse App\\Models\\VisualNovel;\nuse Illuminate\\Http\\RedirectResponse;\n\nclass FavoriteController extends Controller\n{\n    public function store(VisualNovel $visualNovel): RedirectResponse\n    {\n        \n\n        $this->authorize('create', \\App\\Models\\Favorite::class);\n\n        $result = request()->user()->favorites()->toggle($visualNovel->id);\n\n        $added = count($result['attached']) > 0;\n\n        return back()->with(\n            'success',\n            $added ? 'Added to favorites.' : 'Removed from favorites.'\n        );\n    }\n}\n"
+        }
+    ]
+}

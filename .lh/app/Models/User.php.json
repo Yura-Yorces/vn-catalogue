@@ -1,0 +1,58 @@
+{
+    "sourceFile": "app/Models/User.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1794288644784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794288650049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,10 @@\n         'nickname',\n         'username',\n         'password',\n         'role',\n-        'banned_until'\n+        'banned_until',\n+        'ban_reason'\n     ];\n \n     protected $hidden = [\n         'password',\n"
+                },
+                {
+                    "date": 1794288670791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,16 +34,18 @@\n         'username',\n         'password',\n         'role',\n         'banned_until',\n-        'ban_reason'\n+        'ban_reason',\n     ];\n \n     protected $hidden = [\n         'password',\n         'remember_token',\n     ];\n \n+    protected\n+\n     public function isStaff(): bool\n     {\n         return in_array($this->role, [self::ROLE_MODERATOR, self::ROLE_ADMIN], true);\n     }\n"
+                },
+                {
+                    "date": 1794288692812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         'password',\n         'remember_token',\n     ];\n \n-    protected\n+    protected cast();\n \n     public function isStaff(): bool\n     {\n         return in_array($this->role, [self::ROLE_MODERATOR, self::ROLE_ADMIN], true);\n"
+                },
+                {
+                    "date": 1794288702135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         'password',\n         'remember_token',\n     ];\n \n-    protected cast();\n+    protected casts();\n \n     public function isStaff(): bool\n     {\n         return in_array($this->role, [self::ROLE_MODERATOR, self::ROLE_ADMIN], true);\n"
+                },
+                {
+                    "date": 1794288765077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         'password',\n         'remember_token',\n     ];\n \n-    protected casts();\n+    protected casts(): array;\n \n     public function isStaff(): bool\n     {\n         return in_array($this->role, [self::ROLE_MODERATOR, self::ROLE_ADMIN], true);\n"
+                },
+                {
+                    "date": 1794288771318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,10 +42,13 @@\n         'password',\n         'remember_token',\n     ];\n \n-    protected casts(): array;\n+    protected casts(): array\n+    {\n \n+    }\n+\n     public function isStaff(): bool\n     {\n         return in_array($this->role, [self::ROLE_MODERATOR, self::ROLE_ADMIN], true);\n     }\n"
+                },
+                {
+                    "date": 1794288781159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,11 @@\n     ];\n \n     protected casts(): array\n     {\n-\n+        return [\n+            \n+        ]\n     }\n \n     public function isStaff(): bool\n     {\n"
+                },
+                {
+                    "date": 1794288788529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n \n     protected casts(): array\n     {\n         return [\n-            \n+            'password'\n         ]\n     }\n \n     public function isStaff(): bool\n"
+                },
+                {
+                    "date": 1794288795044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n \n     protected casts(): array\n     {\n         return [\n-            'password' -\n+            'password' => \n         ]\n     }\n \n     public function isStaff(): bool\n"
+                },
+                {
+                    "date": 1794288813740,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n     protected casts(): array\n     {\n         return [\n             'password' => 'hashed',\n-            'banned_until' => 'datetime'\n+            'banned_until' => 'datetime',\n         ]\n     }\n \n     public function isStaff(): bool\n"
+                }
+            ],
+            "date": 1794288644784,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\n// use Illuminate\\Contracts\\Auth\\MustVerifyEmail;\nuse Database\\Factories\\UserFactory;\nuse Illuminate\\Database\\Eloquent\\Attributes\\Fillable;\nuse Illuminate\\Database\\Eloquent\\Attributes\\Hidden;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\SoftDeletes;\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\nuse Illuminate\\Notifications\\Notifiable;\n\n// #[Fillable(['name', 'email', 'password'])]\n// #[Hidden(['password', 'remember_token'])]\nclass User extends Authenticatable\n{\n    /** @use HasFactory<UserFactory> */\n    use HasFactory, Notifiable, SoftDeletes;\n\n    public const ROLE_USER = 'user';\n    public const ROLE_MODERATOR = 'moderator';\n    public const ROLE_ADMIN = 'admin';\n\n\n    /**\n     * Get the attributes that should be cast.\n     *\n     * @return array<string, string>\n     */\n\n    protected $fillable = [\n        'nickname',\n        'username',\n        'password',\n        'role',\n        'banned_until'\n    ];\n\n    protected $hidden = [\n        'password',\n        'remember_token',\n    ];\n\n    public function isStaff(): bool\n    {\n        return in_array($this->role, [self::ROLE_MODERATOR, self::ROLE_ADMIN], true);\n    }\n\n    public function isAdmin(): bool\n    {\n        return $this->role === self::ROLE_ADMIN;\n    }\n\n    protected function casts(): array\n    {\n        return [\n            'password' => 'hashed',\n        ];\n    }\n\n    public function ratings()\n    {\n        return $this->hasMany(Rating::class);\n    }\n\n    public function favorites()\n    {\n        return $this->belongsToMany(VisualNovel::class, 'favorites')->withTimestamps();\n    }\n}\n"
+        }
+    ]
+}

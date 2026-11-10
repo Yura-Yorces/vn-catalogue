@@ -1,0 +1,42 @@
+{
+    "sourceFile": "database/migrations/0001_01_01_000000_create_users_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1794250077313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794250086142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n             $table->softDeletes();\n         });\n \n         Schema::create('password_reset_tokens', function (Blueprint $table) {\n-            \n+            $table->string('email')->primary()  ;\n             $table->string('token');\n             $table->timestamp('created_at')->nullable();\n         });\n \n"
+                },
+                {
+                    "date": 1794250091407,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n             $table->softDeletes();\n         });\n \n         Schema::create('password_reset_tokens', function (Blueprint $table) {\n-            $table->string('email')->primary()  ;\n+            $table->string('email')->primary();\n             $table->string('token');\n             $table->timestamp('created_at')->nullable();\n         });\n \n"
+                },
+                {
+                    "date": 1794288541073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n             $table->enum('role', ['moderator', 'admin', 'user'])->default('user');\n             $table->rememberToken();\n             $table->timestamps();\n             $table->softDeletes();\n+            $table->timestamps('');\n         });\n \n         Schema::create('password_reset_tokens', function (Blueprint $table) {\n             $table->string('email')->primary();\n"
+                },
+                {
+                    "date": 1794288549507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n             $table->enum('role', ['moderator', 'admin', 'user'])->default('user');\n             $table->rememberToken();\n             $table->timestamps();\n             $table->softDeletes();\n-            $table->timestamps('');\n+            $table->timestamps('banned');\n         });\n \n         Schema::create('password_reset_tokens', function (Blueprint $table) {\n             $table->string('email')->primary();\n"
+                },
+                {
+                    "date": 1794288559263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n             $table->enum('role', ['moderator', 'admin', 'user'])->default('user');\n             $table->rememberToken();\n             $table->timestamps();\n             $table->softDeletes();\n-            $table->timestamps('banned_until')->nullable;\n+            $table->timestamps('banned_until')->nullable();\n         });\n \n         Schema::create('password_reset_tokens', function (Blueprint $table) {\n             $table->string('email')->primary();\n"
+                },
+                {
+                    "date": 1794288572841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n             $table->rememberToken();\n             $table->timestamps();\n             $table->softDeletes();\n             $table->timestamps('banned_until')->nullable();\n-            $table->text\n+            $table->text()\n         });\n \n         Schema::create('password_reset_tokens', function (Blueprint $table) {\n             $table->string('email')->primary();\n"
+                }
+            ],
+            "date": 1794250077313,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    /**\n     * Run the migrations.\n     */\n    public function up(): void\n    {\n        Schema::create('users', function (Blueprint $table) {\n            $table->id();\n            $table->string('nickname');\n            $table->string('username')->unique();\n            $table->string('password');\n            $table->enum('role', ['moderator', 'admin', 'user'])->default('user');\n            $table->rememberToken();\n            $table->timestamps();\n            $table->softDeletes();\n        });\n\n        Schema::create('password_reset_tokens', function (Blueprint $table) {\n            \n            $table->string('token');\n            $table->timestamp('created_at')->nullable();\n        });\n\n        Schema::create('sessions', function (Blueprint $table) {\n            $table->string('id')->primary();\n            $table->foreignId('user_id')->nullable()->index();\n            $table->string('ip_address', 45)->nullable();\n            $table->text('user_agent')->nullable();\n            $table->longText('payload');\n            $table->integer('last_activity')->index();\n        });\n    }\n\n    /**\n     * Reverse the migrations.\n     */\n    public function down(): void\n    {\n        Schema::dropIfExists('users');\n        Schema::dropIfExists('password_reset_tokens');\n        Schema::dropIfExists('sessions');\n    }\n};\n"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "sourceFile": "resources/views/staff/dashboard.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1794249552909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794249557951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,19 +19,19 @@\n             ['Users', $usersCount, null],\n             ['Ratings', $ratingsCount, null],\n         ] as [$label, $count, $url])\n             @if ($url)\n-    <a href=\"{{ $url }}\" class=\"bg-gray-800 … hover:border-blue-400 transition\">\n-@else\n-    <div class=\"bg-gray-800 …\">\n-@endif\n-    <div class=\"text-sm text-gray-400\">{{ $label }}</div>\n-    <div class=\"text-3xl font-bold text-white mt-1\">{{ $count }}</div>\n-@if ($url)\n-    </a>\n-@else\n-    </div>\n-@endif\n+                <a href=\"{{ $url }}\" class=\"bg-gray-800 … hover:border-blue-400 transition\">\n+            @else\n+                <div class=\"bg-gray-800 …\">\n+            @endif\n+                <div class=\"text-sm text-gray-400\">{{ $label }}</div>\n+                <div class=\"text-3xl font-bold text-white mt-1\">{{ $count }}</div>\n+            @if ($url)\n+                </a>\n+            @else\n+                </div>\n+            @endif\n         @endforeach\n     </div>\n </div>\n @endsection\n"
+                },
+                {
+                    "date": 1794249568615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,20 +18,12 @@\n             ['Visual Novels', $novelsCount, route('staff.novels.index')],\n             ['Users', $usersCount, null],\n             ['Ratings', $ratingsCount, null],\n         ] as [$label, $count, $url])\n-            @if ($url)\n-                <a href=\"{{ $url }}\" class=\"bg-gray-800 … hover:border-blue-400 transition\">\n-            @else\n-                <div class=\"bg-gray-800 …\">\n-            @endif\n+            <{{ $url ? 'a href=' . $url : 'div' }} class=\"bg-gray-800 border border-gray-700 rounded-xl p-5 {{ $url ? 'hover:border-blue-400 transition' : '' }}\">\n                 <div class=\"text-sm text-gray-400\">{{ $label }}</div>\n                 <div class=\"text-3xl font-bold text-white mt-1\">{{ $count }}</div>\n-            @if ($url)\n-                </a>\n-            @else\n-                </div>\n-            @endif\n+            </{{ $url ? 'a' : 'div' }}>\n         @endforeach\n     </div>\n </div>\n @endsection\n"
+                },
+                {
+                    "date": 1794249585738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,20 +18,12 @@\n             ['Visual Novels', $novelsCount, route('staff.novels.index')],\n             ['Users', $usersCount, null],\n             ['Ratings', $ratingsCount, null],\n         ] as [$label, $count, $url])\n-            @if ($url)\n-    <a href=\"{{ $url }}\" class=\"bg-gray-800 … hover:border-blue-400 transition\">\n-@else\n-    <div class=\"bg-gray-800 …\">\n-@endif\n-    <div class=\"text-sm text-gray-400\">{{ $label }}</div>\n-    <div class=\"text-3xl font-bold text-white mt-1\">{{ $count }}</div>\n-@if ($url)\n-    </a>\n-@else\n-    </div>\n-@endif\n+            <{{ $url ? 'a href=' . $url : 'div' }} class=\"bg-gray-800 border border-gray-700 rounded-xl p-5 {{ $url ? 'hover:border-blue-400 transition' : '' }}\">\n+                <div class=\"text-sm text-gray-400\">{{ $label }}</div>\n+                <div class=\"text-3xl font-bold text-white mt-1\">{{ $count }}</div>\n+            </{{ $url ? 'a' : 'div' }}>\n         @endforeach\n     </div>\n </div>\n @endsection\n"
+                },
+                {
+                    "date": 1794249600216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,20 +18,12 @@\n             ['Visual Novels', $novelsCount, route('staff.novels.index')],\n             ['Users', $usersCount, null],\n             ['Ratings', $ratingsCount, null],\n         ] as [$label, $count, $url])\n-            @if ($url)\n-    <a href=\"{{ $url }}\" class=\"bg-gray-800 … hover:border-blue-400 transition\">\n-@else\n-    <div class=\"bg-gray-800 …\">\n-@endif\n-    <div class=\"text-sm text-gray-400\">{{ $label }}</div>\n-    <div class=\"text-3xl font-bold text-white mt-1\">{{ $count }}</div>\n-@if ($url)\n-    </a>\n-@else\n-    </div>\n-@endif\n+            <{{ $url ? 'a href=' . $url : 'div' }} class=\"bg-gray-800 border border-gray-700 rounded-xl p-5 {{ $url ? 'hover:border-blue-400 transition' : '' }}\">\n+                <div class=\"text-sm text-gray-400\">{{ $label }}</div>\n+                <div class=\"text-3xl font-bold text-white mt-1\">{{ $count }}</div>\n+            </{{ $url ? 'a' : 'div' }}>\n         @endforeach\n     </div>\n </div>\n @endsection\n"
+                }
+            ],
+            "date": 1794249552909,
+            "name": "Commit-0",
+            "content": "@extends('dashboard')\n\n@section('main')\n<div class=\"p-6 md:p-8\">\n    <h1 class=\"text-2xl font-bold text-white mb-1\">Staff Panel</h1>\n    <p class=\"text-gray-400 mb-6\">\n        Signed in as {{ auth()->user()->nickname }}\n        <span class=\"ml-2 text-xs uppercase tracking-wide px-2 py-0.5 rounded\n            @if (auth()->user()->isAdmin()) bg-purple-500/20 text-purple-300\n            @else bg-blue-500/20 text-blue-300\n            @endif\">\n            {{ auth()->user()->role }}\n        </span>\n    </p>\n\n    <div class=\"grid grid-cols-1 sm:grid-cols-3 gap-4\">\n        @foreach ([\n            ['Visual Novels', $novelsCount, route('staff.novels.index')],\n            ['Users', $usersCount, null],\n            ['Ratings', $ratingsCount, null],\n        ] as [$label, $count, $url])\n            @if ($url)\n    <a href=\"{{ $url }}\" class=\"bg-gray-800 … hover:border-blue-400 transition\">\n@else\n    <div class=\"bg-gray-800 …\">\n@endif\n    <div class=\"text-sm text-gray-400\">{{ $label }}</div>\n    <div class=\"text-3xl font-bold text-white mt-1\">{{ $count }}</div>\n@if ($url)\n    </a>\n@else\n    </div>\n@endif\n        @endforeach\n    </div>\n</div>\n@endsection\n"
+        }
+    ]
+}

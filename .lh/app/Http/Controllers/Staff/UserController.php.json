@@ -1,0 +1,38 @@
+{
+    "sourceFile": "app/Http/Controllers/Staff/UserController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1794258127208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794258136206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n     {\n         $user = User::findOrFail($id);\n         $this->authorize('ban', $user);\n \n-        \n+        $user->delete();\n \n         return back()->with('success', \"{$user->nickname} banned successfully.\");\n     }\n \n"
+                },
+                {
+                    "date": 1794289410971,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n use Illuminate\\Http\\RedirectResponse;\n use Illuminate\\Http\\Request;\n use Illuminate\\View\\View;\n \n+\n class UserController extends Controller\n {\n     //\n     public function index(): View\n"
+                },
+                {
+                    "date": 1794289417901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n use App\\Models\\User;\n use Illuminate\\Http\\RedirectResponse;\n use Illuminate\\Http\\Request;\n use Illuminate\\View\\View;\n+use Illuminate\n \n-\n class UserController extends Controller\n {\n     //\n     public function index(): View\n"
+                },
+                {
+                    "date": 1794289424625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n use App\\Models\\User;\n use Illuminate\\Http\\RedirectResponse;\n use Illuminate\\Http\\Request;\n use Illuminate\\View\\View;\n-use Illuminate\\C\n+use Illuminate\\Su\n \n class UserController extends Controller\n {\n     //\n"
+                },
+                {
+                    "date": 1794289442126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     {\n         $user = User::findOrFail($id);\n         $this->authorize('ban', $user);\n \n-        $da\n+        $dat\n \n         $user->delete();\n \n         return back()->with('success', \"{$user->nickname} banned successfully.\");\n"
+                }
+            ],
+            "date": 1794258127208,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Staff;\n\nuse App\\Http\\Controllers\\Controller;\nuse App\\Models\\User;\nuse Illuminate\\Http\\RedirectResponse;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\View\\View;\n\nclass UserController extends Controller\n{\n    //\n    public function index(): View\n    {\n        $users = User::withTrashed()\n            ->orderByRaw('deleted_at IS NOT NULL')\n            ->orderBy('username')\n            ->paginate(20);\n\n        return view('staff.users.index', compact('users'));\n    }\n\n    public function ban(int $id): RedirectResponse\n    {\n        $user = User::findOrFail($id);\n        $this->authorize('ban', $user);\n\n        \n\n        return back()->with('success', \"{$user->nickname} banned successfully.\");\n    }\n\n    public function restore(int $id): RedirectResponse\n    {\n        $user = User::withTrashed()->findOrFail($id);\n        $this->authorize('restore', $user);\n\n        $user->restore();\n\n        return back()->with('success', \"{$user->nickname} restored successfully.\");\n    }\n}\n"
+        }
+    ]
+}

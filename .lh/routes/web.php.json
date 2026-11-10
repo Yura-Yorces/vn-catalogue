@@ -1,0 +1,30 @@
+{
+    "sourceFile": "routes/web.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1794259348756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1794259356690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,10 +51,11 @@\n         ->name('favorites.store');\n \n     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');\n     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');\n+\n     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');\n-Route::get('/my-reviews', [RatingController::class, 'mine'])->name('ratings.mine');\n+    Route::get('/my-reviews', [RatingController::class, 'mine'])->name('ratings.mine');\n });\n \n \n // Staff\n"
+                },
+                {
+                    "date": 1794259474139,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n \n     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');\n     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');\n \n-    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');\n+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favortesi.index');\n     Route::get('/my-reviews', [RatingController::class, 'mine'])->name('ratings.mine');\n });\n \n \n"
+                },
+                {
+                    "date": 1794259487985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,10 +52,10 @@\n \n     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');\n     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');\n \n-    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favortesi.index');\n-    Route::get('/my-reviews', [RatingController::class, 'mine'])->name('ratings.mine');\n+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('profile.favorites');\n+    Route::get('/my-reviews', [RatingController::class, 'mine'])->name('profile.my-rating');\n });\n \n \n // Staff\n"
+                }
+            ],
+            "date": 1794259348756,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse App\\Http\\Controllers\\AuthController;\nuse App\\Http\\Controllers\\Staff\\DashboardController as StaffDashboardController;\nuse App\\Http\\Controllers\\Staff\\VisualNovelController as StaffVisualNovelController;\nuse App\\Http\\Controllers\\Staff\\RoleController as StaffRoleController;\nuse App\\Http\\Controllers\\Staff\\UserController as StaffUserController;\nuse App\\Http\\Controllers\\FavoriteController;\nuse App\\Http\\Controllers\\ProfileController;\nuse App\\Http\\Controllers\\RatingController;\n\nuse App\\Http\\Controllers\\VisualNovelController;\nuse Illuminate\\Support\\Facades\\Route;\n\n// Public\n\nRoute::redirect('/', '/novels');\n\nRoute::get('/novels', [VisualNovelController::class, 'index'])->name('novels.index');\nRoute::get('/novels/{visualNovel}', [VisualNovelController::class, 'show'])->name('novels.show');\n\n\n// Guest\n\nRoute::middleware('guest')->group(function () {\n    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');\n    Route::post('/login', [AuthController::class, 'login'])\n        ->middleware('throttle:5,1')\n        ->name('login.submit');\n\n    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');\n    Route::post('/register', [AuthController::class, 'register'])\n        ->middleware('throttle:5,1')\n        ->name('register.submit');\n});\n\nRoute::post('/logout', [AuthController::class, 'logout'])\n    ->middleware('auth')\n    ->name('logout');\n\n\n// Users\n\nRoute::middleware('auth')->group(function () {\n    Route::post('/novels/{visualNovel}/ratings', [RatingController::class, 'store'])\n        ->name('ratings.store');\n    Route::delete('/novels/{visualNovel}/ratings', [RatingController::class, 'destroy'])\n        ->name('ratings.destroy');\n\n    Route::post('/novels/{visualNovel}/favorite', [FavoriteController::class, 'store'])\n        ->name('favorites.store');\n\n    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');\n    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');\n    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');\nRoute::get('/my-reviews', [RatingController::class, 'mine'])->name('ratings.mine');\n});\n\n\n// Staff\n\nRoute::middleware(['auth', 'role:moderator,admin'])\n    ->prefix('staff')\n    ->name('staff.')\n    ->group(function () {\n        Route::get('/', [StaffDashboardController::class, 'index'])->name('dashboard');\n\n        Route::resource('novels', StaffVisualNovelController::class)->except('show');\n\n        Route::get('users', [StaffUserController::class, 'index'])->name('users.index');\n        Route::delete('/users/{id}', [StaffUserController::class, 'ban'])->name('users.ban');\n        Route::patch('users/{id}/restore', [StaffUserController::class, 'restore'])->name('users.restore');\n\n        Route::middleware('role:admin')->group(function () {\n            Route::get('roles', [StaffRoleController::class, 'index'])->name('roles.index');\n            Route::patch('roles/{user}', [StaffRoleController::class, 'update'])->name('roles.update');\n        });\n    });\n\n"
+        }
+    ]
+}
